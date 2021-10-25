@@ -1,8 +1,8 @@
 import pygame
 import time
 import sys
-from pygame.display import toggle_fullscreen
 from pygame.locals import *
+from weather.weather import *
 
 # INITIATE WINDOW =========================================================== #
 clock = pygame.time.Clock()
@@ -62,6 +62,8 @@ while True:
                 fullscreen = not fullscreen
                 win = pygame.display.set_mode((SCREEN_SIZE), pygame.FULLSCREEN) if fullscreen else pygame.display.set_mode(
                     (1024, 576), pygame.RESIZABLE)
+            if event.key == K_w:
+                weather()
 
     if fullscreen:
         win.blit(pygame.transform.scale(
