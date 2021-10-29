@@ -1,6 +1,8 @@
 import pygame
+import threading
 import sys
 import io
+import os
 from datetime import datetime
 from urllib.request import urlopen
 from pygame.locals import *
@@ -22,12 +24,67 @@ def weather():
 
     SCREEN_SIZE = (pygame.display.Info().current_w,
                    pygame.display.Info().current_h)
-    WINDOW_SIZE = (1024, 576)
+    WINDOW_SIZE = (1920, 1080)
     DISPLAY_SIZE = (1920, 1080)
 
     win = pygame.display.set_mode(WINDOW_SIZE, pygame.RESIZABLE)
     display = pygame.Surface(DISPLAY_SIZE)
 
+    
+    # TRANSITIONS =============================================================== #
+    loading_animation = []
+    for filename in os.listdir("./assets/loading screen/infinity-loader"):
+        loading_animation.append(pygame.image.load(
+            f"./assets/loading screen/infinity-loader/{filename}"))
+    
+    loaded = False
+    global loadframe
+    def loading(start=0):
+        global loadframe
+        i = 0
+        while not loaded:
+            i+=1
+            if start + i > 179:
+                i = 0 - start
+            win.fill((43, 45, 47))
+            win.blit(loading_animation[start + i], (560, 240))
+            pygame.display.update()
+            clock.tick(framerate)
+            loadframe = start + i
+            
+       
+    def fadein(start=0):
+        frames = 32
+        for i in range(frames):
+            win.fill((43, 45, 47))
+            win.blit(loading_animation[(start + i) % 179], (560, 240))
+            display.set_alpha((256/frames) * i)
+            if fullscreen:
+                win.blit(pygame.transform.scale(
+                    display, SCREEN_SIZE), (0, 0))
+            else:
+                win.blit(pygame.transform.scale(
+                    display, (scaled_win()[0])), scaled_win()[1])
+            pygame.display.update()
+            clock.tick(framerate)
+
+
+    def fadeout():
+        frames = 32
+        for i in range(frames):
+            win.fill((43, 45, 47))
+            win.blit(loading_animation[179 - frames + i], (560, 240))
+            display.set_alpha(255 - (256/frames) * i)
+            if fullscreen:
+                win.blit(pygame.transform.scale(
+                    display, SCREEN_SIZE), (0, 0))
+            else:
+                win.blit(pygame.transform.scale(
+                    display, (scaled_win()[0])), scaled_win()[1])
+            pygame.display.update()
+            clock.tick(framerate)
+
+    threading.Thread(target=loading).start()
     # UPDATE DATA =============================================================== #
     def update():
         global icon
@@ -69,37 +126,6 @@ def weather():
             position = (0, 0)
         return scaled_win, position
 
-    # TRANSITIONS =============================================================== #
-
-    def fadein():
-        frames = 64
-        for i in range(frames):
-            win.blit(pygame.transform.scale(
-                loading, (scaled_win()[0])), scaled_win()[1])
-            display.set_alpha((256/frames) * i)
-            if fullscreen:
-                win.blit(pygame.transform.scale(
-                    display, SCREEN_SIZE), (0, 0))
-            else:
-                win.blit(pygame.transform.scale(
-                    display, (scaled_win()[0])), scaled_win()[1])
-            pygame.display.update()
-            clock.tick(framerate)
-
-    def fadeout():
-        frames = 64
-        for i in range(frames):
-            win.blit(pygame.transform.scale(
-                loading, (scaled_win()[0])), scaled_win()[1])
-            display.set_alpha(255 - (256/frames) * i)
-            if fullscreen:
-                win.blit(pygame.transform.scale(
-                    display, SCREEN_SIZE), (0, 0))
-            else:
-                win.blit(pygame.transform.scale(
-                    display, (scaled_win()[0])), scaled_win()[1])
-            pygame.display.update()
-            clock.tick(framerate)
 
     # GAMELOOP ================================================================== #
     text = font.render(
@@ -107,7 +133,8 @@ def weather():
     display.blit(wallpaper, (0, 0))
     display.blit(icon, (100, 100))
     display.blit(text, (200, 200))
-    fadein()
+    loaded = True
+    fadein(loadframe)
 
     while True:
         

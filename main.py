@@ -1,7 +1,10 @@
 import pygame
+import threading
 import sys
+import os
 from pygame.locals import *
 from weather.weather import *
+from newapp.app import *
 
 # INITIATE WINDOW =========================================================== #
 clock = pygame.time.Clock()
@@ -14,8 +17,9 @@ framerate = 60
 
 SCREEN_SIZE = (pygame.display.Info().current_w,
                pygame.display.Info().current_h)
-WINDOW_SIZE = (1024, 576)
+# WINDOW_SIZE = (1024, 576)
 DISPLAY_SIZE = (1920, 1080)
+WINDOW_SIZE = (1920, 1080)
 
 win = pygame.display.set_mode(WINDOW_SIZE, pygame.RESIZABLE)
 display = pygame.Surface(DISPLAY_SIZE)
@@ -24,10 +28,14 @@ display = pygame.Surface(DISPLAY_SIZE)
 fullscreen = False
 fadein = True
 fadeout = False
+loading_animation = []
 
 # LOAD ASSETS =============================================================== #
 wallpaper = pygame.image.load("./assets/wallpaper/wallpaperinuse.jpg")
 loading = pygame.image.load("./assets/loading screen/loading.jpg")
+for filename in os.listdir("./assets/loading screen/infinity-loader"):
+    loading_animation.append(pygame.image.load(
+        f"./assets/loading screen/infinity-loader/{filename}"))
 
 # SCALING WINDOW ============================================================ #
 
@@ -47,11 +55,34 @@ def scaled_win():
 
 
 # TRANSITIONS =============================================================== #
-def fadein():
+loading_animation = []
+for filename in os.listdir("./assets/loading screen/infinity-loader"):
+    loading_animation.append(pygame.image.load(
+        f"./assets/loading screen/infinity-loader/{filename}"))
+
+loaded = False
+loadframe = 0
+
+
+def loading(start=0):
+    global loadframe
+    i = 0
+    while not loaded:
+        i += 1
+        if start + i > 179:
+            i = 0 - start
+        win.fill((43, 45, 47))
+        win.blit(loading_animation[start + i], (560, 240))
+        pygame.display.update()
+        clock.tick(framerate)
+        loadframe = start + i
+
+
+def fadein(start=0):
     frames = 32
     for i in range(frames):
-        win.blit(pygame.transform.scale(
-            loading, (scaled_win()[0])), scaled_win()[1])
+        win.fill((43, 45, 47))
+        win.blit(loading_animation[(start + i) % 179], (560, 240))
         display.set_alpha((256/frames) * i)
         if fullscreen:
             win.blit(pygame.transform.scale(
@@ -66,8 +97,8 @@ def fadein():
 def fadeout():
     frames = 32
     for i in range(frames):
-        win.blit(pygame.transform.scale(
-            loading, (scaled_win()[0])), scaled_win()[1])
+        win.fill((43, 45, 47))
+        win.blit(loading_animation[179 - frames + i], (560, 240))
         display.set_alpha(255 - (256/frames) * i)
         if fullscreen:
             win.blit(pygame.transform.scale(
@@ -111,8 +142,13 @@ while True:
                 win = pygame.display.set_mode((SCREEN_SIZE), pygame.FULLSCREEN) if fullscreen else pygame.display.set_mode(
                     (1024, 576), pygame.RESIZABLE)
             if event.key == K_w:
-                fadeout()
-                weather()
+                threading.Thread(target=fadeout).start()
+                threading.Thread(target=weather()).start()
+                fadein()
+                pygame.display.set_caption("Smart Table GUI")
+            if event.key == K_a:
+                threading.Thread(target=fadeout).start()
+                threading.Thread(target=app()).start()
                 fadein()
                 pygame.display.set_caption("Smart Table GUI")
 
