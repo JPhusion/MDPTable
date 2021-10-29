@@ -12,14 +12,14 @@ def call():
         f"https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&units=metric&appid={API_key}")
     return response.json()
 
-def tempNow(data):
+def gettempNow(data):
     return data["current"]["temp"]
 
-def feelsNow(data):
+def getfeelsNow(data):
     return data["current"]["feels_like"]
 
-def descNow(data):
+def getdescNow(data):
     return data["current"]["weather"][0]["description"]
 
-def icon(data):
+def geticon(data):
     return data["current"]["weather"][0]["icon"]

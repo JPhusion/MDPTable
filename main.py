@@ -1,5 +1,4 @@
 import pygame
-import time
 import sys
 from pygame.locals import *
 from weather.weather import *
@@ -23,12 +22,16 @@ display = pygame.Surface(DISPLAY_SIZE)
 
 # INITIATE VARIABLE ========================================================= #
 fullscreen = False
+fadein = True
+fadeout = False
 
 # LOAD ASSETS =============================================================== #
 wallpaper = pygame.image.load("./assets/wallpaper/wallpaperinuse.jpg")
-
+loading = pygame.image.load("./assets/loading screen/loading.jpg")
 
 # SCALING WINDOW ============================================================ #
+
+
 def scaled_win():
     ratioX, ratioY = 16, 9
     if WINDOW_SIZE[0]/ratioX > WINDOW_SIZE[1]/ratioY:
@@ -43,11 +46,56 @@ def scaled_win():
     return scaled_win, position
 
 
+# TRANSITIONS =============================================================== #
+def fadein():
+    frames = 32
+    for i in range(frames):
+        win.blit(pygame.transform.scale(
+            loading, (scaled_win()[0])), scaled_win()[1])
+        display.set_alpha((256/frames) * i)
+        if fullscreen:
+            win.blit(pygame.transform.scale(
+                display, SCREEN_SIZE), (0, 0))
+        else:
+            win.blit(pygame.transform.scale(
+                display, (scaled_win()[0])), scaled_win()[1])
+        pygame.display.update()
+        clock.tick(framerate)
+
+
+def fadeout():
+    frames = 32
+    for i in range(frames):
+        win.blit(pygame.transform.scale(
+            loading, (scaled_win()[0])), scaled_win()[1])
+        display.set_alpha(255 - (256/frames) * i)
+        if fullscreen:
+            win.blit(pygame.transform.scale(
+                display, SCREEN_SIZE), (0, 0))
+        else:
+            win.blit(pygame.transform.scale(
+                display, (scaled_win()[0])), scaled_win()[1])
+        pygame.display.update()
+        clock.tick(framerate)
+
+
 # GAMELOOP ================================================================== #
+display.blit(wallpaper, (0, 0))
+for i in range(64):
+    win.fill((0, 0, 0))
+    display.set_alpha((256/64) * i)
+    if fullscreen:
+        win.blit(pygame.transform.scale(
+            display, SCREEN_SIZE), (0, 0))
+    else:
+        win.blit(pygame.transform.scale(
+            display, (scaled_win()[0])), scaled_win()[1])
+    pygame.display.update()
+    clock.tick(framerate)
+
 while True:
 
     display.blit(wallpaper, (0, 0))
-    # display.blit(pygame.transform.scale(wallpaper, (scaled_win()[0])), scaled_win()[1])
 
     for event in pygame.event.get():
         if event.type == QUIT:
@@ -63,7 +111,10 @@ while True:
                 win = pygame.display.set_mode((SCREEN_SIZE), pygame.FULLSCREEN) if fullscreen else pygame.display.set_mode(
                     (1024, 576), pygame.RESIZABLE)
             if event.key == K_w:
+                fadeout()
                 weather()
+                fadein()
+                pygame.display.set_caption("Smart Table GUI")
 
     if fullscreen:
         win.blit(pygame.transform.scale(
