@@ -7,7 +7,7 @@ from datetime import datetime
 from urllib.request import urlopen
 from pygame.locals import *
 try:
-    from api import *
+    from scrapers.weather import *
 except:
     from weather.api import *
 

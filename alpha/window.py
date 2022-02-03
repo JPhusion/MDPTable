@@ -6,6 +6,7 @@ from PyQt5.QtWebEngineWidgets import *
 
 import sys
 
+
 class MainWindow(QMainWindow):
 
     def __init__(self, *args, **kwargs):
@@ -18,11 +19,12 @@ class MainWindow(QMainWindow):
 
         self.showMaximized()
         
-    def close(self):
-        self.close()
+    def KeyPressedEvent(self, event):
+        if event.key() == Qt.Key_Space:
+            self.close()
 
 app = QApplication(sys.argv)
 window = MainWindow()
-
-app.exec_()
-window.close()
+window.show()
+sys.exit(app.exec_())
+    
