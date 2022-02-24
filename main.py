@@ -20,9 +20,9 @@ pygame.display.set_caption("Smart Table GUI")
 framerate = 60
 # SCREEN_SIZE = (pygame.display.Info().current_w,
 #                pygame.display.Info().current_h)
-SCREEN_SIZE = (1200, 1920)
-DISPLAY_SIZE = (1200, 1920)
-WINDOW_SIZE = (1200, 1920)
+SCREEN_SIZE = (2400, 1920)
+DISPLAY_SIZE = (2400, 1920)
+WINDOW_SIZE = (2400, 1920)
 win = pygame.display.set_mode(WINDOW_SIZE, pygame.RESIZABLE)
 display = pygame.Surface(DISPLAY_SIZE)
 
