@@ -42,12 +42,13 @@ def scaled_win():
     return scaled_win, position
 
 
+widget1.update()
 # Gameloop
 while True:
 
     pygame.draw.rect(display, (0, 0, 0), pygame.Rect(
             0, 0, 120, 120))
-    widget1.draw(display, (1, 0))
+    widget1.draw(display, (3, 2))
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:

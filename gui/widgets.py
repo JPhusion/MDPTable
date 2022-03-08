@@ -29,14 +29,27 @@ class widget_weather(widget):
         self.height = height*384
         self.api_counter = 0
         
-        self.font = pygame.freetype.Font("./assets/fonts/FontsFree-Net-SFProDisplay-Bold.ttf", 60)
+        self.font_200 = pygame.freetype.Font("./assets/fonts/FontsFree-Net-SFProDisplay-Bold.ttf", 200)
+        self.font_32 = pygame.freetype.Font("./assets/fonts/FontsFree-Net-SFProDisplay-Bold.ttf", 32)
 
-        self.descNow = 0
-        self.tempNow = 0
+        self.descNow = "Sunny and Cloudy"
+        self.tempNow = 0git
         self.feelsNow = 0
 
     def draw(self, surface, position=(0, 0)):
         self.draw_border(surface, position)
-        self.font
-        # text = pygame.font.render(
-        #     f"{self.descNow}\nCurrent Temperature {self.tempNow}\nFeels Like {self.feelsNow}", True, "BLUE")
+        temp_text = f"{self.tempNow}°C"
+        temp_pos = (position[0] * 400 + 80, position[1] * 384 + 80)
+        self.font_200.render_to(surface, temp_pos, temp_text, (255, 255, 255))
+        desc_text = f"{self.descNow}"
+        desc_pos = (position[0] * 400 + 80, position[1] * 384 + 300)
+        self.font_32.render_to(surface, desc_pos, desc_text, (255, 255, 255))
+        feels_text = f"Feels like: {self.feelsNow}°C"
+        feels_pos = (position[0] * 400 + 500, position[1] * 384 + 90)
+        self.font_32.render_to(surface, feels_pos, feels_text, (255, 255, 255))
+        
+    def update(self):
+        data = call()
+        self.descNow = descNow(data)
+        self.tempNow = round(int(tempNow(data)), 3)
+        self.feelsNow = round(int(feelsNow(data)), 3)
