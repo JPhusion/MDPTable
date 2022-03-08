@@ -26,7 +26,7 @@ win = pygame.display.set_mode(WINDOW_SIZE, pygame.RESIZABLE)
 display = pygame.Surface(DISPLAY_SIZE)
 
 fullscreen = True
-widget1 = widget(2, 1)
+widget1 = widget_weather(2, 1)
 
 def scaled_win():
     ratioX, ratioY = 16, 9
