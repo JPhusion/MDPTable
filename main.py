@@ -26,8 +26,9 @@ win = pygame.display.set_mode(WINDOW_SIZE, pygame.RESIZABLE)
 display = pygame.Surface(DISPLAY_SIZE)
 
 fullscreen = True
-# widget1 = widget_weather(2, 1)
-widget2 = widget_time()
+widget1 = widget_weather(2, 1)
+widget2 = widget_time(3, 1)
+widget3 = widget_covid(3, 1)
 
 def scaled_win():
     ratioX, ratioY = 16, 9
@@ -43,16 +44,17 @@ def scaled_win():
     return scaled_win, position
 
 
-# widget1.update()
-widget2.update()
+widget1.update()
+widget3.update()
 # Gameloop
 while True:
 
     display.fill((0, 0, 0))
     pygame.draw.rect(display, (0, 0, 0), pygame.Rect(
             0, 0, 120, 120))
-    # widget1.draw(display, (3, 2))
+    widget1.draw(display, (3, 2))
     widget2.draw(display)
+    widget3.draw(display, (0, 2))
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:

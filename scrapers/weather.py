@@ -19,7 +19,7 @@ def feelsNow(data):
     return data["current"]["feels_like"]
 
 def descNow(data):
-    return data["current"]["weather"][0]["description"]
+    return data["current"]["weather"][0]["description"].capitalize()
 
 def icon(data):
     return data["current"]["weather"][0]["icon"]

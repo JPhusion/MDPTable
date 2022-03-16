@@ -5,13 +5,21 @@ def date(worded=False):
     return (
         datetime.date.today().strftime("%B %d, %Y")
         if worded
-        else datetime.date.today().strftime("%d/%m/%Y")
+        else datetime.date.today().strftime("%d · %m · %Y")
     )
 
 
-def time(twentyFourHour=False):
+def hour(twentyFourHour=False):
     return (
-        datetime.datetime.now().strftime("%H:%M:%S")
+        datetime.datetime.now().strftime("%H")
         if twentyFourHour
-        else datetime.datetime.now().strftime("%I:%M:%S")
+        else datetime.datetime.now().strftime("%I")
     )
+    
+    
+def minutes():
+    return datetime.datetime.now().strftime("%M")
+
+
+def seconds():
+    return datetime.datetime.now().strftime("%S")
