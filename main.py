@@ -6,8 +6,10 @@ import sys
 os.environ['SDL_VIDEO_WINDOW_POS'] = f"{0},{0}"
 
 import pygame
-from gui.widgets import *
 
+from gui.widgets.clock import *
+from gui.widgets.covid import *
+from gui.widgets.weather import *
 
 # init window
 clock = pygame.time.Clock()
@@ -26,8 +28,7 @@ win = pygame.display.set_mode(WINDOW_SIZE, pygame.RESIZABLE)
 display = pygame.Surface(DISPLAY_SIZE)
 
 fullscreen = True
-widget1 = widget_weather(2, 1)
-widget2 = widget_time(3, 1)
+widget1 = widget_clock(2, 2)
 widget3 = widget_covid(3, 1)
 
 def scaled_win():
@@ -43,17 +44,14 @@ def scaled_win():
         position = (0, 0)
     return scaled_win, position
 
-
-widget1.update()
-widget3.update()
+# widget1.update()
 # Gameloop
 while True:
 
     display.fill((0, 0, 0))
     pygame.draw.rect(display, (0, 0, 0), pygame.Rect(
             0, 0, 120, 120))
-    widget1.draw(display, (3, 2))
-    widget2.draw(display)
+    widget1.draw(display, (0, 0))
     widget3.draw(display, (0, 2))
 
     for event in pygame.event.get():
