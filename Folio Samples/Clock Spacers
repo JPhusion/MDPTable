@@ -1,0 +1,26 @@
+def hour(): pass
+def date(): pass
+def minutes(): pass
+def seconds(): pass
+
+def draw(self, surface, position=(0, 0)):
+    scale_x, scale_y = self.width / 400, self.height / 384
+    scale = min(scale_x, scale_y)
+    h_a, h_b, h_c = 100 * scale, 30 * scale, 36 * scale
+    s_a, s_b = 15 * scale, 37 * scale
+    spacer = (self.height - 218 * scale) / 2
+
+    self.draw_border(surface, position)
+    self.write_centre(position, surface, f"{hour()}:{minutes()}", self.font_bondi, h_a, spacer + h_a / 2, (255, 255, 255))
+    self.write_centre(position, surface, f"{seconds()}", self.font_orkneyl, h_b, spacer + h_a + s_a + h_b / 2, (255, 255, 255))
+    self.write_centre(position, surface, f"{date(True)}", self.font_orkneyl, h_c, spacer + h_a + s_a + h_b + s_b + h_c / 2, (255, 255, 255))
+
+def write_centre(self, position, surface, text, font, size, y, color=(255, 255, 255), x=0):
+    text_rect = font.get_rect(text, size=size)
+    text_rect.center = (position[0] * 400 + self.width/2 + x, position[1] * 384 + self.height/2 + y)
+    font.render_to(surface, text_rect, text, color, size=size)
+        
+def write(self, position, surface, text, font, size, x, y, color=(255, 255, 255)):
+    text_rect = font.get_rect(text, size=size)
+    text_rect.center = (position[0] * 400 + x, position[1] * 384 + y)
+    font.render_to(surface, (x, y), text, color, size=size)

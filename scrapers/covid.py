@@ -8,8 +8,8 @@ def containsNumber(value):
     return False
 
 
-def get_soup():
-    url = "https://covidlive.com.au/nsw"
+def get_soup(state="nsw"):
+    url = f"https://covidlive.com.au/{state}"
     uClient = urlopen(url)
     page_html = uClient.read()
     uClient.close()

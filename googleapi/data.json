@@ -1,0 +1,97 @@
+[
+    {
+        "kind": "calendar#event",
+        "etag": "3312928367298000",
+        "id": "783ioglbtck5hgcd4oskft1sre",
+        "status": "confirmed",
+        "htmlLink": "https://www.google.com/calendar/event?eid=NzgzaW9nbGJ0Y2s1aGdjZDRvc2tmdDFzcmUgbWRwdGFibGVAbQ",
+        "created": "2022-06-29T00:56:20.000Z",
+        "updated": "2022-06-29T00:56:23.649Z",
+        "summary": "Test 1",
+        "creator": {
+            "email": "mdptable@gmail.com",
+            "self": true
+        },
+        "organizer": {
+            "email": "mdptable@gmail.com",
+            "self": true
+        },
+        "start": {
+            "date": "2022-06-21"
+        },
+        "end": {
+            "date": "2022-06-22"
+        },
+        "transparency": "transparent",
+        "iCalUID": "783ioglbtck5hgcd4oskft1sre@google.com",
+        "sequence": 1,
+        "reminders": {
+            "useDefault": false
+        },
+        "eventType": "default"
+    },
+    {
+        "kind": "calendar#event",
+        "etag": "3312928387112000",
+        "id": "0qr0jkatfpu6n2mfno74h0dekf",
+        "status": "confirmed",
+        "htmlLink": "https://www.google.com/calendar/event?eid=MHFyMGprYXRmcHU2bjJtZm5vNzRoMGRla2YgbWRwdGFibGVAbQ",
+        "created": "2022-06-29T00:56:33.000Z",
+        "updated": "2022-06-29T00:56:33.556Z",
+        "summary": "test 2",
+        "creator": {
+            "email": "mdptable@gmail.com",
+            "self": true
+        },
+        "organizer": {
+            "email": "mdptable@gmail.com",
+            "self": true
+        },
+        "start": {
+            "dateTime": "2022-06-30T09:00:00+10:00",
+            "timeZone": "Australia/Sydney"
+        },
+        "end": {
+            "dateTime": "2022-06-30T10:00:00+10:00",
+            "timeZone": "Australia/Sydney"
+        },
+        "iCalUID": "0qr0jkatfpu6n2mfno74h0dekf@google.com",
+        "sequence": 0,
+        "reminders": {
+            "useDefault": true
+        },
+        "eventType": "default"
+    },
+    {
+        "kind": "calendar#event",
+        "etag": "3312928419138000",
+        "id": "4udpje4ulpsq9utkfd9efrhlq1",
+        "status": "confirmed",
+        "htmlLink": "https://www.google.com/calendar/event?eid=NHVkcGplNHVscHNxOXV0a2ZkOWVmcmhscTEgbWRwdGFibGVAbQ",
+        "created": "2022-06-29T00:56:49.000Z",
+        "updated": "2022-06-29T00:56:49.569Z",
+        "summary": "test 3",
+        "creator": {
+            "email": "mdptable@gmail.com",
+            "self": true
+        },
+        "organizer": {
+            "email": "mdptable@gmail.com",
+            "self": true
+        },
+        "start": {
+            "dateTime": "2022-07-08T08:30:00+10:00",
+            "timeZone": "Australia/Sydney"
+        },
+        "end": {
+            "dateTime": "2022-07-08T09:30:00+10:00",
+            "timeZone": "Australia/Sydney"
+        },
+        "iCalUID": "4udpje4ulpsq9utkfd9efrhlq1@google.com",
+        "sequence": 0,
+        "reminders": {
+            "useDefault": true
+        },
+        "eventType": "default"
+    }
+]

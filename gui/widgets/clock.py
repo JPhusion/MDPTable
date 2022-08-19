@@ -11,9 +11,10 @@ from scrapers.clock import *
 
 class widget_clock(widget):
     
-    def __init__(self, width=1, height=1):
+    def __init__(self, width=1, height=1, position=(0, 0)):
         self.width = width*400
         self.height = height*384
+        self.position = position
         
         self.font = pygame.freetype.Font("./assets/fonts/FontsFree-Net-SFProDisplay-Bold.ttf")
         self.font_kontanter = pygame.freetype.Font("./assets/fonts/Kontanter-Bold.otf")
@@ -25,11 +26,8 @@ class widget_clock(widget):
         self.font_orkneyb = pygame.freetype.Font("./assets/fonts/Orkney Bold.ttf")
         
     def draw(self, surface, position=(0, 0)):
-        if self.height >= self.width:
-            scale = self.width/400
-        else:
-            scale = self.height/384
+        scale = min(self.width / 400, self.height / 384)
         self.draw_border(surface, position)
-        self.write_centre(position, surface, f"{hour()}:{minutes()}", self.font_bondi, 100*scale, -62*scale, (255, 255, 255))
-        self.write_centre(position, surface, f"{seconds()}", self.font_orkneyl, 30*scale, 18*scale, (255, 255, 255))
-        self.write_centre(position, surface, f"{date(True)}", self.font_orkneyl, 35*scale, 88*scale, (255, 255, 255))
+        self.write_centre(position, surface, f"{hour()}:{minutes()}", self.font_bondi, 100*scale, -62*scale)
+        self.write_centre(position, surface, f"{seconds()}", self.font_orkneyl, 30*scale, 18*scale)
+        self.write_centre(position, surface, f"{date(True)}", self.font_orkneyl, 35*scale, 88*scale)
