@@ -9,6 +9,7 @@ import sys
 # os.environ['SDL_VIDEODRIVER'] = "dummy"
 # os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 os.environ['SDL_VIDEO_WINDOW_POS'] = f"{0},{0}"
+os.environ['PYGAME_FREETYPE'] = '1'
 
 
 # init window
