@@ -11,7 +11,7 @@ class widget:
 
     def __init__(self, width, height, position=(0,0)):
         self.width = width*400
-        self.height = height*384
+        self.height = height*380
         self.position = position
 
         self.loading_animation = []
@@ -19,8 +19,13 @@ class widget:
             self.loading_animation.append(pygame.transform.scale(pygame.image.load(
                 f"./assets/animations/loading_grad/TABLEC_LOADING-{i+1}.png"), (342, 256)))
 
+    def squares_occupied(self):
+        for i in range(int(self.width/400)):
+            for j in range(int(self.height/380)):
+                yield (i + self.position[0], j + self.position[1])
+
     def draw_border(self, surface, position=(0, 0)):
-        origin = (position[0] * 400, position[1] * 384)
+        origin = (position[0] * 400, position[1] * 380)
         pygame.draw.rect(surface, (255, 255, 255),
                          pygame.Rect(origin[0]+20, origin[1]+20, self.width-40, self.height-40))
         pygame.draw.rect(surface, (0, 0, 0), pygame.Rect(
@@ -29,12 +34,12 @@ class widget:
     def write_centre(self, position, surface, text, font, size, y, color=(255, 255, 255), x=0):
         text_rect = font.get_rect(text, size=size)
         text_rect.center = (
-            position[0] * 400 + self.width/2 + x, position[1] * 384 + self.height/2 + y)
+            position[0] * 400 + self.width/2 + x, position[1] * 380 + self.height/2 + y)
         font.render_to(surface, text_rect, text, color, size=size)
 
     def write(self, position, surface, text, font, size, x, y, color=(255, 255, 255)):
         text_rect = font.get_rect(text, size=size)
-        text_rect.center = (position[0] * 400 + x, position[1] * 384 + y)
+        text_rect.center = (position[0] * 400 + x, position[1] * 380 + y)
         font.render_to(surface, (x, y), text, color, size=size)
 
     def draw_svg(self, position, surface, filename, size, x, y, color=(255, 255, 255)):
@@ -49,9 +54,12 @@ class widget:
         arr = pygame.PixelArray(image)
         arr.replace((0, 0, 0), color)
         del arr
-        surface.blit(image, (position[0] * 400 + x, position[1] * 384 + y))
+        surface.blit(image, (position[0] * 400 + x, position[1] * 380 + y))
 
     def loading(self, surface, frame_count):
         self.draw_border(surface, self.position)
         surface.blit(self.loading_animation[int(frame_count % len(self.loading_animation))],
-                     (self.position[0] * 400 + self.width/2 - 171, self.position[1] * 384 + self.height/2 - 128))
+                     (self.position[0] * 400 + self.width/2 - 171, self.position[1] * 380 + self.height/2 - 128))
+        
+    def update(self, frame_count):
+        return

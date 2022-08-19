@@ -13,7 +13,7 @@ class widget_clock(widget):
     
     def __init__(self, width=1, height=1, position=(0, 0)):
         self.width = width*400
-        self.height = height*384
+        self.height = height*380
         self.position = position
         
         self.font = pygame.freetype.Font("./assets/fonts/FontsFree-Net-SFProDisplay-Bold.ttf")
@@ -25,9 +25,9 @@ class widget_clock(widget):
         self.font_orkneym = pygame.freetype.Font("./assets/fonts/Orkney Medium.ttf")
         self.font_orkneyb = pygame.freetype.Font("./assets/fonts/Orkney Bold.ttf")
         
-    def draw(self, surface, position=(0, 0)):
-        scale = min(self.width / 400, self.height / 384)
-        self.draw_border(surface, position)
-        self.write_centre(position, surface, f"{hour()}:{minutes()}", self.font_bondi, 100*scale, -62*scale)
-        self.write_centre(position, surface, f"{seconds()}", self.font_orkneyl, 30*scale, 18*scale)
-        self.write_centre(position, surface, f"{date(True)}", self.font_orkneyl, 35*scale, 88*scale)
+    def draw(self, surface, frame_count):
+        scale = min(self.width / 400, self.height / 380)
+        self.draw_border(surface, self.position)
+        self.write_centre(self.position, surface, f"{hour()}:{minutes()}", self.font_bondi, 100*scale, -62*scale)
+        self.write_centre(self.position, surface, f"{seconds()}", self.font_orkneyl, 30*scale, 18*scale)
+        self.write_centre(self.position, surface, f"{date(True)}", self.font_orkneyl, 35*scale, 88*scale)

@@ -1,8 +1,9 @@
 from gui.widgets.weather import *
 from gui.widgets.covid import *
 from gui.widgets.clock import *
+from commands.widget import widget as widget_cmd
+
 import pygame_textinput
-import pygame
 import os
 import sys
 
@@ -11,6 +12,7 @@ import sys
 os.environ['SDL_VIDEO_WINDOW_POS'] = f"{0},{0}"
 os.environ['PYGAME_FREETYPE'] = '1'
 
+import pygame
 
 # init window
 clock = pygame.time.Clock()
@@ -48,10 +50,9 @@ def scaled_win():
     return scaled_win, position
 
 
-def process_cmd():
-    cmd.value = ""
-    cmd.cursor_visible = False
-    cmd_bullet.value = ""
+def process_cmd(widgets):
+    if cmd.value.startswith('widget'):
+        return widget_cmd(cmd.value, widgets)
 
 
 def main():
@@ -66,9 +67,12 @@ def main():
     fullscreen = True
     cmd_active = False
     frame_count = 0
+    cmd_hist = []
+    cmd_hist_popped = []
 
     # instantiating widgets
-    widgets = [widget_covid(2, 1, (0,1))]
+    # widgets = [widget_covid(3, 2, (0,3)), widget_covid(3, 2, (0,0))]
+    widgets = []
 
     # program loop
     while True:
@@ -78,21 +82,17 @@ def main():
         events = pygame.event.get()
 
         # Command prompt location
-        display.blit(cmd.surface, (50, 10))
-        display.blit(cmd_bullet.surface, (10, 10))
+        display.blit(cmd.surface, (60, 1890))
+        display.blit(cmd_bullet.surface, (20, 1890))
 
         # Command prompt event handler
         if cmd_active:
             cmd.update(events)
 
-        if frame_count % 60 == 0:
-            # TODO update widgets
-            pass
-
-        # draw widgets
+        # draw widgets and update
         for widget in widgets:
-            # widget.draw(display)
-            widget.loading(display, frame_count)
+            widget.draw(display, frame_count)
+            widget.update(frame_count)
 
         for event in events:
             if event.type == pygame.QUIT:
@@ -110,7 +110,14 @@ def main():
                         (1080, 1920), pygame.RESIZABLE)
                 if event.key == pygame.K_RETURN:
                     if cmd_active:
-                        process_cmd()
+                        cmd_hist.append(cmd.value)
+                        if cmd.value.startswith('widget'):
+                            widgets = process_cmd(widgets)
+                        else:
+                            process_cmd(widgets)
+                        cmd.value = ""
+                        cmd.cursor_visible = False
+                        cmd_bullet.value = ""
                     else:
                         cmd_active = True
                         cmd_bullet.value = ">>> "
@@ -121,6 +128,18 @@ def main():
                     cmd.value = ""
                     cmd.cursor_visible = False
                     cmd_bullet.value = ""
+                if event.key == pygame.K_UP:
+                    if cmd_active:
+                        if len(cmd_hist) > 0:
+                            cmd.value = cmd_hist[-1]
+                            cmd_hist_popped.append(cmd_hist.pop())
+                if event.key == pygame.K_DOWN:
+                    if cmd_active:
+                        if len(cmd_hist_popped) > 0:
+                            cmd.value = cmd_hist_popped[-1]
+                            cmd_hist.append(cmd_hist_popped[-1]) 
+                            cmd_hist_popped.pop()
+                            
 
         if fullscreen:
             win.blit(pygame.transform.scale(
