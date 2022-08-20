@@ -17,7 +17,7 @@ class widget:
         self.loading_animation = []
         for i in range(15):
             self.loading_animation.append(pygame.transform.scale(pygame.image.load(
-                f"./assets/animations/loading_grad/TABLEC_LOADING-{i+1}.png"), (342*width, 256*height)))
+                f"./assets/animations/loading_grad/TABLEC_LOADING-{i+1}.png"), (342, 256)))
 
     def squares_occupied(self):
         for i in range(int(self.width/400)):
@@ -60,7 +60,7 @@ class widget:
     def loading(self, surface, frame_count):
         self.draw_border(surface, self.position)
         surface.blit(self.loading_animation[int(frame_count % len(self.loading_animation))],
-                     (self.position[0] * 400 + self.width/2 - 171*(self.width/400), self.position[1] * 380 + self.height/2 - 128*(self.width/380)))
+                     (self.position[0] * 400 + self.width/2 - 171, self.position[1] * 380 + self.height/2 - 128))
         
     def update(self, frame_count):
         return
