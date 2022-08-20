@@ -10,7 +10,7 @@ import io
 class widget:
 
     def __init__(self, width, height, position=(0,0)):
-        self.width = width*400 - 40 if width < 3 else width*400
+        self.width = width*400
         self.height = height*380 
         self.position = position
 
@@ -25,7 +25,8 @@ class widget:
                 yield (i + self.position[0], j + self.position[1])
 
     def draw_border(self, surface, position=(0, 0)):
-        origin = (position[0] * 400, position[1] * 380)
+        offset = 100 if position[1] < 3 else 0
+        origin = (position[0] * 400 - offset, position[1] * 380)
         pygame.draw.rect(surface, (255, 255, 255),
                          pygame.Rect(origin[0]+20, origin[1]+20, self.width-40, self.height-40))
         pygame.draw.rect(surface, (0, 0, 0), pygame.Rect(
