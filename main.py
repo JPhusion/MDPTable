@@ -1,7 +1,9 @@
 from gui.widgets.weather import *
 from gui.widgets.covid import *
 from gui.widgets.clock import *
+from gui.widgets.start import *
 from commands.widget import widget as widget_cmd
+from commands.widget import update as update_cmd
 
 import pygame_textinput
 import os
@@ -54,6 +56,8 @@ def scaled_win():
 def process_cmd(widgets):
     if cmd.value.startswith('widget'):
         return widget_cmd(cmd.value, widgets)
+    if cmd.value == 'update':
+        return update_cmd()
 
 
 def main():
@@ -73,7 +77,7 @@ def main():
 
     # instantiating widgets
     # widgets = [widget_covid(3, 2, (0,3)), widget_covid(3, 2, (0,0))]
-    widgets = []
+    widgets = [widget_start(3, 5 (0,0)), widget_start(3, 5 (3,0))]
 
     # program loop
     while True:
