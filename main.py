@@ -79,8 +79,8 @@ def main():
 
     # instantiating widgets
     # widgets = [widget_covid(3, 2, (0,3)), widget_covid(3, 2, (0,0))]
-    widgets = [widget_start(3, 5, (0,0)), widget_start(3, 5, (3,0))]
-    # widgets = [widget_clock(3, 5, (0,0)), widget_clock(3, 5, (3,0))]
+    # widgets = [widget_start(3, 5, (0,0)), widget_start(3, 5, (3,0))]
+    widgets = [widget_clock(3, 5, (0,0)), widget_clock(3, 5, (3,0))]
     
     # program loop
     while True:
