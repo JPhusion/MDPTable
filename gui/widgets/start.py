@@ -14,6 +14,11 @@ class widget_start(widget):
         self.height = height*380
         self.position = position
         
+        self.loading_animation = []
+        for i in range(15):
+            self.loading_animation.append(pygame.transform.scale(pygame.image.load(
+                f"./assets/animations/loading_grad/TABLEC_LOADING-{i+1}.png"), (342, 256)))
+        
         self.font = pygame.freetype.Font("./assets/fonts/FontsFree-Net-SFProDisplay-Bold.ttf")
         self.font_kontanter = pygame.freetype.Font("./assets/fonts/Kontanter-Bold.otf")
         self.font_bondi = pygame.freetype.Font("./assets/fonts/Bondi.ttf")
