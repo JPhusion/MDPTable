@@ -35,5 +35,5 @@ class widget_start(widget):
             self.loading(surface, frame_count)
             return
         self.write_centre(self.position, surface, f"Sign In", self.font_orkney, 100*scale, -62*scale)
-        self.write_centre(self.position, surface, f"Press [ENTER] to being up the command line", self.font_orkneyl, 30*scale, 18*scale)
-        self.write_centre(self.position, surface, f"Type 'Login [username]' to login", self.font_orkneyl, 35*scale, 88*scale)
+        self.write_centre(self.position, surface, f"Press [ENTER] to being up the command line", self.font_orkneyl, 30, 18*scale)
+        self.write_centre(self.position, surface, f"Type 'Login [username]' to login", self.font_orkneyl, 35, 88*scale)
