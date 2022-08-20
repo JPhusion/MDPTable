@@ -4,8 +4,7 @@ import sys
 
 def update():
     repo = git.Repo('./')
-    print(list(repo.iter_commits('main..main@{u}')))
-    print(list(repo.iter_commits('main@{u}..main')))
-    if list(repo.iter_commits('main..main@{u}')):
+    # print(repo.iter_commits('master..origin/master'))
+    if repo.iter_commits('master..origin/master'):
         repo.remotes.origin.pull()
         os.execl(sys.executable, sys.executable, *sys.argv)
