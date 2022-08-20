@@ -10,8 +10,8 @@ import io
 class widget:
 
     def __init__(self, width, height, position=(0,0)):
-        self.width = width*400
-        self.height = height*380
+        self.width = width*400 - 40 if width < 3 else width*400
+        self.height = height*380 
         self.position = position
 
         self.loading_animation = []
