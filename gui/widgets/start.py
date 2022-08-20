@@ -31,7 +31,7 @@ class widget_start(widget):
     def draw(self, surface, frame_count):
         scale = min(self.width / 400, self.height / 380)
         # self.draw_border(surface, self.position)
-        if frame_count < 30*10:
+        if frame_count < 30*1:
             self.loading(surface, frame_count)
             return
         self.write_centre(self.position, surface, f"Sign In", self.font_bondi, 100*scale, -62*scale)

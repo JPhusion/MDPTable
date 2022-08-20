@@ -1,3 +1,5 @@
+# Test to see if it auto update - ignore this comment
+
 from gui.widgets.weather import *
 from gui.widgets.covid import *
 from gui.widgets.clock import *
