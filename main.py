@@ -1,11 +1,11 @@
-# Test to see if it auto update - ignore this comment
+from commands.update import update as update_cmd
+update_cmd()
 
 from gui.widgets.weather import *
 from gui.widgets.covid import *
 from gui.widgets.clock import *
 from gui.widgets.start import *
 from commands.widget import widget as widget_cmd
-from commands.update import update as update_cmd
 
 import pygame_textinput
 import os
