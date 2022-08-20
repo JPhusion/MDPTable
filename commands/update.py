@@ -3,7 +3,6 @@ import git
 import sys
 
 def update():
-    # TEST
     repo = git.Repo('./')
     print(list(repo.iter_commits('main..main@{u}')))
     print(list(repo.iter_commits('main@{u}..main')))
