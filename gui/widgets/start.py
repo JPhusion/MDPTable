@@ -29,6 +29,6 @@ class widget_start(widget):
         if frame_count < 30*10:
             self.loading(surface, frame_count)
             return
-        self.write_centre(self.position, surface, f"{Sign In}", self.font_bondi, 100*scale, -62*scale)
+        self.write_centre(self.position, surface, f"Sign In", self.font_bondi, 100*scale, -62*scale)
         # self.write_centre(self.position, surface, f"{seconds()}", self.font_orkneyl, 30*scale, 18*scale)
         # self.write_centre(self.position, surface, f"{date(True)}", self.font_orkneyl, 35*scale, 88*scale)
