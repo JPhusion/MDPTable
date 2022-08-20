@@ -25,7 +25,7 @@ class widget:
                 yield (i + self.position[0], j + self.position[1])
 
     def draw_border(self, surface, position=(0, 0)):
-        offset = 100 if position[1] < 3 else 0
+        offset = 100 if position[1] > 2 else 0
         origin = (position[0] * 400 - offset, position[1] * 380)
         pygame.draw.rect(surface, (255, 255, 255),
                          pygame.Rect(origin[0]+20, origin[1]+20, self.width-40, self.height-40))
