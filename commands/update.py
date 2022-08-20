@@ -10,4 +10,3 @@ def update():
         repo.remotes.origin.pull()
         repo.remotes.origin.fetch()
         os.execl(sys.executable, sys.executable, *sys.argv)
-# test
