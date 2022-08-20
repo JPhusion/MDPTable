@@ -3,6 +3,7 @@ import git
 import sys
 
 def update():
+    # TEST
     repo = git.Repo('./')
     if list(repo.iter_commits('main..main@{u}')):
         repo.remotes.origin.pull()
