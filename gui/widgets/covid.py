@@ -47,7 +47,7 @@ class widget_covid(widget):
         self.write_centre(self.position, surface, f"Deaths: {self.deaths}", self.font_orkneyl, 25*scale, 2*scale)
         self.write_centre(self.position, surface, f"Tests: {self.tests}", self.font_orkneyl, 25*scale, 52*scale)
         self.write_centre(self.position, surface, f"Vaccinated: {self.vaccines}", self.font_orkneyl, 27*scale, 100*scale)
-        self.write(self.position, surface, f"Last Updated: {self.last_updated}", self.font_orkneyl, 16*scale, 40*scale, 335*(self.height / 380)+380*(self.position[1]))
+        self.write(self.position, surface, f"Last Updated: {self.last_updated}", self.font_orkneyl, 16*scale, 40*scale + (self.position - 1)*400, 335*(self.height / 380)+380*(self.position[1]))
     
     def update(self, frame_count):
         if frame_count % 60 != 0:
