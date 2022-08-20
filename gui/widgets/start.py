@@ -10,7 +10,7 @@ from gui.widgets.widgets import widget
 class widget_start(widget):
     
     def __init__(self, width=1, height=1, position=(0, 0)):
-        self.width = width*400 - 40 if width < 3 else width*400
+        self.width = width*400 - 80 if width < 3 else width*400
         self.height = height*380
         self.position = position
         
