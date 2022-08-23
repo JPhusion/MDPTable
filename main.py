@@ -6,6 +6,7 @@ from gui.widgets.covid import *
 from gui.widgets.clock import *
 from gui.widgets.start import *
 from commands.widget import widget as widget_cmd
+from commands.signin import signin as signin_cmd
 
 import pygame_textinput
 import os
@@ -60,6 +61,8 @@ def process_cmd(widgets):
         return widget_cmd(cmd.value, widgets)
     if cmd.value == 'update':
         return update_cmd()
+    if cmd.value == 'signin':
+        return signin.cmd()
 
 
 def main():
