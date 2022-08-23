@@ -122,7 +122,7 @@ def main():
                 if event.key == pygame.K_RETURN:
                     if cmd_active:
                         cmd_hist.append(cmd.value)
-                        if cmd.value.startswith('widget'):
+                        if cmd.value.startswith('widget') or ['signin'] in cmd.value:
                             widgets = process_cmd(widgets)
                         else:
                             process_cmd(widgets)
