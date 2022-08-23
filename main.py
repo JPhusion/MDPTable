@@ -61,8 +61,8 @@ def process_cmd(widgets):
         return widget_cmd(cmd.value, widgets)
     if cmd.value == 'update':
         return update_cmd()
-    if cmd.value == 'signin':
-        return signin.cmd()
+    if cmd.value == 'login':
+        return signin_cmd()
 
 
 def main():
@@ -125,7 +125,7 @@ def main():
                 if event.key == pygame.K_RETURN:
                     if cmd_active:
                         cmd_hist.append(cmd.value)
-                        if cmd.value.startswith('widget') or 'signin' in cmd.value:
+                        if cmd.value.startswith('widget') or 'login' in cmd.value:
                             widgets = process_cmd(widgets)
                         else:
                             process_cmd(widgets)
