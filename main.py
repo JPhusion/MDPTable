@@ -85,6 +85,9 @@ def main():
     # program loop
     while True:
 
+        if frame_count % 60 == 0:
+            update_cmd()
+            
         # reset frame
         display.fill((0, 0, 0))
         events = pygame.event.get()
