@@ -1,6 +1,3 @@
-import time
-time.sleep(10)
-
 from commands.update import update as update_cmd
 update_cmd()
 
