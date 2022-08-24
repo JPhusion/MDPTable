@@ -28,9 +28,13 @@ def get_future_events():
     return formatted_events
 
 
-while True:
+def get_formatted_events():
     for event in get_future_events():
-        print(event['summary'], event['start']['dateTime'])
-    time.sleep(5)
+        yield(event['summary'], event['start']['dateTime'][:10], event['start']['dateTime'][11:16])
+
+# while True:
+#     for event in get_future_events():
+#         print(event['summary'], event['start']['dateTime'][11:16])
+#     time.sleep(5)
 
 # print(get_raw_events())

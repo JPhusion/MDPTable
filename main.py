@@ -61,7 +61,7 @@ def process_cmd(widgets):
         return widget_cmd(cmd.value, widgets)
     if cmd.value == 'update':
         return update_cmd()
-    if cmd.value == 'login':
+    if 'login' in cmd.value:
         return signin_cmd()
 
 
@@ -153,6 +153,8 @@ def main():
                             cmd.value = cmd_hist_popped[-1]
                             cmd_hist.append(cmd_hist_popped[-1]) 
                             cmd_hist_popped.pop()
+                if event.key == pygame.K_F2:
+                    startup()
                             
 
         if fullscreen:
@@ -166,7 +168,8 @@ def main():
         clock.tick(framerate)
 
 
-def loading_screen():
+
+def startup():
     # instantiating display
     SCREEN_SIZE = (2400, 1920)
     DISPLAY_SIZE = (2400, 1920)
@@ -177,19 +180,13 @@ def loading_screen():
     # defining variables
     fullscreen = True
     frame_count = 0
-    loading_animation = []
-    for i in range(15):
-        loading_animation.append(pygame.image.load(
-            f"./assets/animations/loading_grad/TABLEC_LOADING-{i+1}.png"))
     
     # program loop
     while True:
         
         display.fill((0, 0, 0))
-        display.blit(loading_animation[int(frame_count%len(loading_animation))], (0, 0))
-        events = pygame.event.get()
-
-        for event in events:
+    
+        for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
@@ -199,11 +196,8 @@ def loading_screen():
                     win = pygame.display.set_mode(
                         WINDOW_SIZE, pygame.RESIZABLE)
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_F11:
-                    fullscreen = not fullscreen
-                    win = pygame.display.set_mode((SCREEN_SIZE), pygame.FULLSCREEN) if fullscreen else pygame.display.set_mode(
-                        (1080, 1920), pygame.RESIZABLE)
-        frame_count += 1
+                if event.key == pygame.K_SPACE:
+                    main()
         if fullscreen:
             win.blit(pygame.transform.scale(
                 display, SCREEN_SIZE), (0, 0))
@@ -215,4 +209,4 @@ def loading_screen():
 
 
 if __name__ == "__main__":
-    main()
+    startup()
