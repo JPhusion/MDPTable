@@ -9,6 +9,7 @@ from commands.widget import widget as widget_cmd
 from commands.signin import signin as signin_cmd
 
 import pygame_textinput
+import random
 import os
 import sys
 
@@ -41,6 +42,7 @@ cmd_bullet = pygame_textinput.TextInputVisualizer(font_color=(255, 255, 255), cu
 cmd_bullet.cursor_visible = False
 cmd_bullet.value = ""
 
+particles = []
 
 def scaled_win():
     ratioX, ratioY = 16, 9
@@ -67,6 +69,7 @@ def process_cmd(widgets):
 
 def main():
     # instantiating display
+    pygame.mixer.music.stop()
     SCREEN_SIZE = (2400, 1920)
     DISPLAY_SIZE = (2400, 1920)
     WINDOW_SIZE = (2400, 1920)
@@ -167,7 +170,24 @@ def main():
         pygame.display.update()
         clock.tick(framerate)
 
-
+def update_particles(display):
+    for particle in particles:
+        try:
+            particle[0][0] += particle[1][0]
+            particle[0][1] += particle[1][1]*2
+            particle[2] -= 0.03
+            pygame.draw.circle(display, particle[3], [int(
+                particle[0][0]), int(particle[0][1])], int(particle[2]))
+            if particle[2] <= 0:
+                particles.remove(particle)
+        except ValueError:
+            particle[0][0] += particle[1][0]
+            particle[0][1] += particle[1][1]*2
+            particle[2] -= 0.03
+            pygame.draw.circle(display, (255, 255, 255), [int(
+                particle[0][0]), int(particle[0][1])], int(particle[2]))
+            if particle[2] <= 0:
+                particles.remove(particle)
 
 def startup():
     # instantiating display
@@ -181,11 +201,21 @@ def startup():
     fullscreen = True
     frame_count = 0
     
+    # starting sounds
+    pygame.mixer.music.load("./assets/sounds/fire.mp3")
+    pygame.mixer.music.play(loops=100000, start=0.0, fade_ms=10000)
+    
     # program loop
     while True:
         
+        for i in range(20):
+            # particles.append([[WINDOW_SIZE[0]/2, WINDOW_SIZE[1]/2], [random.randint(0, 1000)/100 - 5,
+            #             random.randint(0, 1000)/100 - 5], random.randint(0, 10), (random.randint(100, 255), random.randint(0, 50), random.randint(0, 10))])
+            particles.append([[random.randint(0, WINDOW_SIZE[0]), WINDOW_SIZE[1]], [random.randint(0, 1000)/100 - 5,
+                        random.randint(0, 1000)/100 - 5], random.randint(0, 10), (random.randint(100, 255), random.randint(0, 50), random.randint(0, 10))])
+        
         display.fill((0, 0, 0))
-    
+        update_particles(display)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
