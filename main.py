@@ -203,7 +203,7 @@ def startup():
     
     # starting sounds
     pygame.mixer.music.load("./assets/sounds/fire.mp3")
-    pygame.mixer.music.play(loops=100000, start=0.0, fade_ms=10000)
+    pygame.mixer.music.play(loops=100000)
     
     # program loop
     while True:
