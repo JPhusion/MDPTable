@@ -62,7 +62,7 @@ class widget_weather(widget):
         self.write_centre(self.position, surface, f"Temperature: {self.tempNow}°C", self.font_orkneyl, 25*scale, 85*scale)
         self.write_centre(self.position, surface, f"Feels Like: {self.tempNow}°C", self.font_orkneyl, 25*scale, 120*scale)
         # self.write_centre(self.position, surface, f"Icon: {self.icon}", self.font_orkneyl, 27*scale, 100*scale)
-        self.draw_svg(self.position, surface, f"./assets/weather_icons/{self.icon}.svg", 130*scale, self.width/2 - 180*scale/2  + 30*scale, 140*scale)
+        # self.draw_svg(self.position, surface, f"./assets/weather_icons/{self.icon}.svg", 130*scale, self.width/2 - 180*scale/2  + 30*scale, 140*scale)
         
     def update(self, frame_count):
         if frame_count % 60 != 0:
