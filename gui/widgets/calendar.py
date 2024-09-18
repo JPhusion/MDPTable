@@ -93,5 +93,8 @@ class widget_cal(widget):
         self.events = [
             ["Hardware Flex", "Now", "EETG14"],
             ["Pubcrawl with Friends", "9pm", "The Argyle, The Rocks"],
-            ["MATH2069 Tutorial", "Tomorrow 12pm", "H13 1041"],
+            # ["MATH2069 Tutorial", "Tomorrow 12pm", "H13 Lawernce East 1041"],
+            ["MATH2069 Lecture", "Tomorrow 2pm", "Keith Burrows Theatre"],
+            ["Bouldering with Eric", "Tomorrow 5pm", "ClimbFit Maquorie"],
+            ["rUNSWift Lab Session", "Saturday 10am", "Ainsworth Level 5"],
         ]
