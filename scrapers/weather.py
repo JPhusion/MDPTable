@@ -7,7 +7,8 @@ import requests
 
 def call():
     lat, lon = -33.86500, 151.20944
-    API_key = "87a63db4499dfd7bc82e0bd0306f3240"
+    # API_key = "87a63db4499dfd7bc82e0bd0306f3240"
+    API_key = "ce8c3c7d8000ca207b7e994530375e2e"
     response = requests.get(
         f"https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&units=metric&appid={API_key}")
     return response.json()
